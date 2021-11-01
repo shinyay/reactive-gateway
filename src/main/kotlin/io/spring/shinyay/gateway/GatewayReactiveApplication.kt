@@ -5,6 +5,7 @@ import org.springframework.boot.runApplication
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.messaging.rsocket.RSocketRequester
+import org.springframework.web.reactive.function.client.WebClient
 
 @SpringBootApplication
 class GatewayReactiveApplication {
@@ -19,6 +20,9 @@ class GatewayReactiveApplication {
 
     @Bean
     fun rsocketRequester(builder: RSocketRequester.Builder) = builder.tcp("localhost", 8181)
+
+    @Bean
+    fun webClient(builder: WebClient.Builder) = builder.build()
 }
 
 fun main(args: Array<String>) {

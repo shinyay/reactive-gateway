@@ -2,6 +2,7 @@ package io.spring.shinyay.gateway
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.cloud.gateway.route.RouteLocator
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.messaging.rsocket.RSocketRequester
@@ -11,7 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient
 class GatewayReactiveApplication {
 
     @Bean
-    fun gateway(rlb: RouteLocatorBuilder) = rlb.routes()
+    fun gateway(rlb: RouteLocatorBuilder): RouteLocator = rlb.routes()
         .route { r ->
             r.path("/proxy").and().host("*.spring.io")
                 .filters { f -> f.setPath("/customers") }

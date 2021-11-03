@@ -1,6 +1,7 @@
 package io.spring.shinyay.gateway.client
 
 import io.spring.shinyay.gateway.entity.Customer
+import io.spring.shinyay.gateway.entity.Order
 import org.springframework.messaging.rsocket.RSocketRequester
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -22,5 +23,9 @@ class OrderClient(
             .retryWhen(Retry.backoff(10, Duration.ofSeconds(1)))
     }
 
-    
+    fun getOrders(customerId: Long): Flux<Order> {
+        return rsocket!!
+            .route("order.{customerId}", customerId)
+            .retrieveFlux(Order::class.java)
+    }
 }

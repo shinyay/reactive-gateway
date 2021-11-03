@@ -1,3 +1,3 @@
 package io.spring.shinyay.gateway.entity
 
-data class Order(val id: Long)
+data class Order(val id: Long, val customerId: Long)

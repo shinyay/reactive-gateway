@@ -28,4 +28,5 @@ class OrderClient(
             .route("order.{customerId}", customerId)
             .retrieveFlux(Order::class.java)
     }
+
 }
